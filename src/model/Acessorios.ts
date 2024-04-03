@@ -2,12 +2,12 @@ import { Produto } from "./Produto";
 
 export class Acessorios extends Produto{
     
-    private _acessorios: string;
+    private _tipodeAcessorio: string;
   
 
-	constructor(id: number, nome: string, tipo: number, preco: number, genero: string , Ace_Acessorios: string, acessorios: string) {
-        super(id, nome, tipo, preco, genero,) // Atributos da Classe Produto
-		this._acessorios = acessorios;
+	constructor(id: number, nome: string, tipo: number, preco: number,   tipodeacessorio: string) {
+        super(id, nome, tipo, preco) // Atributos da Classe Produto
+		this._tipodeAcessorio = tipodeacessorio;
 	}
 
 
@@ -16,7 +16,7 @@ export class Acessorios extends Produto{
      * @return {string}
      */
 	public get generico(): string {
-		return this._acessorios;
+		return this._tipodeAcessorio;
 	}
 
     /**
@@ -24,11 +24,11 @@ export class Acessorios extends Produto{
      * @param {string} value
      */
 	public set generico(value: string) {
-		this._acessorios = value;
+		this._tipodeAcessorio = value;
 	}
 
     public visualizar(): void {
         super.visualizar();
-        console.log(`Ace_Acessorios: ${this._acessorios}`);
+        console.log(` Tipo de Acessorio: ${this._tipodeAcessorio}`);
     }
 }

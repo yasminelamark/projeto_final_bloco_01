@@ -1,7 +1,17 @@
 ﻿import readlinesync = require("readline-sync");
+import { Roupas } from "./src/model/Roupas";
+import { colors } from "./src/util/Colors";
+import { ProdutoController } from "./src/controller/ProducoController";
+import { Acessorios } from "./src/model/Acessorios";
 export function menu() {
-    let opcao:number;
+  
+    let opcao, id, tipo, preco: number;
+    let nome, tipodeRoupa, acessorios : string;
+    let tipoProduto = ['Roupas', 'Acessorios'];
     
+    const produtoController: ProdutoController = new ProdutoController();
+
+
     while(true) {
 
 
@@ -40,30 +50,98 @@ export function menu() {
             process.exit(0)
         }
 
-        switch(opcao) {
+        switch (opcao) {
             case 1:
-                console.log("\nCRIAR PRODUTO");
-                keyPress();
+                console.log(colors.fg.whitestrong,
+                    "\n\nCriar Produto\n\n", colors.reset);
+
+                nome = readlinesync.question("Digite o Nome do Produto: ");
+
+                tipo = readlinesync.keyInSelect(tipoProduto, "", { cancel: false }) + 1;
+
+                preco = readlinesync.questionFloat("Digite o preco: ");
+
+                switch (tipo) {
+                    case 1:
+                        tipodeRoupa = readlinesync.question("Digite o Nome da Roupa: ");
+                        produtoController.cadastrar(
+                            new Roupas(produtoController.gerarId(),
+                            nome, preco, tipo, tipodeRoupa ));
+                        break;
+                    case 2:
+                      acessorios = readlinesync.question("Digite o tipo de acessorio: ");
+                        produtoController.cadastrar(new Acessorios(produtoController.gerarId(),
+                            nome, preco, tipo, acessorios));
+                        break;
+                }
+
+                keyPress()
                 break;
             case 2:
-                console.log("\nLISTAR TODOS OS PRODUTOS");
-                keyPress();
+                console.log(colors.fg.whitestrong,
+                    "\n\nListar todos os Produtos\n\n", colors.reset);
+
+                produtoController.listarTodas();
+
+                keyPress()
                 break;
             case 3:
-                console.log("\nCONSULTAR PRODUTO POR ID");
-                keyPress();
+                console.log(colors.fg.whitestrong,
+                    "\n\nConsultar dados do Produto - por Id\n\n", colors.reset);
+
+                    id = readlinesync.questionInt("Digite o Id do Produto: ");
+                    produtoController.procurarPorId(id);
+
+                keyPress()
                 break;
             case 4:
-                console.log("\nATUALIZAR PRODUTO");
-                keyPress();
+                console.log(colors.fg.whitestrong,
+                    "\n\nAtualizar dados do Produto\n\n", colors.reset);
+
+                    id = readlinesync.questionInt("Digite o Id do Produto: ");
+                    
+                    let produto = produtoController.buscarNoArray(id);
+
+                    if (produto !== null){
+
+                        nome = readlinesync.question("Digite o Nome do Produto: ");
+
+                        tipo = produto.tipo;
+        
+                        preco = readlinesync.questionFloat("Digite o preco: ");
+        
+                        switch (tipo) {
+                            case 1:
+                                tipodeRoupa = readlinesync.question("Digite o Nome da Roupa: ");
+                                produtoController.atualizar(new Roupas(produto.id,
+                                    nome, preco, tipo, tipodeRoupa ));
+                                break;
+                            case 2:
+                              acessorios = readlinesync.question("Digite o tipo de acessorio: ");
+                                produtoController.atualizar(new Acessorios(produto.id,
+                                    nome, preco, tipo, acessorios));
+                                break;
+                        }
+
+                    }else
+                        console.log("Produto não Encontrado!")
+
+                keyPress()
                 break;
             case 5:
-                console.log("\nDELETAR PRODUTO");
-                keyPress();
+                console.log(colors.fg.whitestrong,
+                    "\n\nApagar um Produto\n\n", colors.reset);
+
+                    id = readlinesync.questionInt("Digite o Id do Produto: ");
+                    produtoController.deletar(id);
+
+                keyPress()
                 break;
             default:
-                console.log("\nOPÇÃO INVÁLIDA!");
-                keyPress();
+                console.log(colors.fg.whitestrong,
+                    "\nOpção Inválida!\n", colors.reset);
+
+                keyPress()
                 break;
         }
     }

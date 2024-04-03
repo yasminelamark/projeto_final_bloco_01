@@ -4,8 +4,8 @@ export class Roupas extends Produto{
     
     private _tipodeRoupa: string;
 
-	constructor(id: number, nome: string, tipo: number, preco: number, genero: string , tipodeRoupa: string) {
-        super(id, nome, tipo, preco, genero) // Atributos da Classe Produto
+	constructor(id: number, nome: string, tipo: number, preco: number, tipodeRoupa: string) {
+        super(id, nome, tipo, preco) // Atributos da Classe Produto
 		this._tipodeRoupa = tipodeRoupa;
 	}
 

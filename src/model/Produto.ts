@@ -4,15 +4,15 @@ export abstract class Produto{
     private _nome: string;
     private _preco: number;
     private _tipo: number;
-    private _genero: string;
+    
 
 
-	constructor(id: number, nome: string, preco: number, tipo: number, genero: string) {
+	constructor(id: number, nome: string, preco: number, tipo: number) {
 		this._id = id;
 		this._nome = nome;
 		this._preco = preco;
 		this._tipo = tipo;
-		this._genero = genero;
+		
 	}
     
 
@@ -48,13 +48,7 @@ export abstract class Produto{
 		return this._tipo;
 	}
 
-    /**
-     * Getter genero
-     * @return {string}
-     */
-	public get genero(): string {
-		return this._genero;
-	}
+   
 
     /**
      * Setter id
@@ -88,13 +82,7 @@ export abstract class Produto{
 		this._tipo = value;
 	}
 
-    /**
-     * Setter genero
-     * @param {string} value
-     */
-	public set genero(value: string) {
-		this._genero = value;
-	}
+    
  
     public visualizar(): void {
 
@@ -116,7 +104,7 @@ export abstract class Produto{
         console.log(`Nome: ${this._nome}`)
         console.log(`Tipo : ${tipo}`)
         console.log(`Preço : ${this._preco}`)
-        console.log(`genero: ${this._genero}`)
+       
     }
 }
 
