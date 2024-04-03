@@ -17,7 +17,7 @@ export function menu() {
 
         console.log("*****************************************************");
         console.log("                                                     ");
-        console.log("               * Loja Street House *                  ");
+        console.log("               * Loja Street House *                 ");
         console.log("                                                     ");
         console.log("*****************************************************");
         console.log("                                                     ");
